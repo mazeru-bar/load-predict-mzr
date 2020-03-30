@@ -67,7 +67,7 @@ def predict():
             img = image.load_img(filepath, target_size=(224, 224))
 
             # 画像ファイルをサーバから削除
-            os.remove(filepath)
+            #os.remove(filepath)
 
             # 読み込んだPIL形式の画像をarrayに変換
             x = image.img_to_array(img)
