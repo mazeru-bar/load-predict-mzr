@@ -1,6 +1,4 @@
-# This file may be used to create an environment using:
-# $ conda create --name <env> --file <this file>
-# platform: win-64
+nomkl
 absl-py=0.9.0=py36_0
 astor=0.8.0=py36_0
 blas=1.0=mkl
