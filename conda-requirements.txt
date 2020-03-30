@@ -32,10 +32,8 @@ mkl=2020.0=166
 mkl-service=2.3.0=py36hb782905_0
 mkl_fft=1.0.6=py36h25d0782_0
 mkl_random=1.0.1=py36h9258bd6_0
-numpy-base=1.18.1=py36hc3f5095_1
 olefile=0.46=py36_0
 openssl=1.1.1e=he774522_0
-pillow=7.0.0=py36hcc1f983_0
 pip=20.0.2=py_2
 protobuf=3.11.3=py36h33f27b4_0
 pyreadline=2.1=py36_1
