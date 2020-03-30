@@ -67,7 +67,7 @@ def predict():
             img = image.load_img(filepath, target_size=(224, 224))
 
             # 画像ファイルをサーバから削除
-            os.remove(filepath)
+            #os.remove(filepath)
 
             # 読み込んだPIL形式の画像をarrayに変換
             x = image.img_to_array(img)
@@ -105,6 +105,7 @@ def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 # デバッグ中にCSSをキャッシュせず瞬時に値を反映する
+"""
 @app.context_processor
 def add_staticfile():
     def staticfile_cp(fname):
@@ -112,6 +113,7 @@ def add_staticfile():
         mtime =  str(int(os.stat(path).st_mtime))
         return '/static/css/' + fname + '?v=' + str(mtime)
     return dict(staticfile=staticfile_cp)
+"""
 
 if __name__ == "__main__":
     #app.run(debug=True)
