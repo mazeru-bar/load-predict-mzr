@@ -24,7 +24,7 @@ Keras-Preprocessing==1.1.0
 Mako==1.1.0
 Markdown==3.2.1
 MarkupSafe==1.1.1
-mkl-service==2.1.0
+mkl-service==2.3.0
 numpy==1.18.1
 oauthlib==3.0.1
 olefile==0.46
