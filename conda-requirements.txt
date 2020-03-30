@@ -1,13 +1,17 @@
-nomkl
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: win-64
 absl-py=0.9.0=py36_0
 astor=0.8.0=py36_0
 blas=1.0=mkl
 ca-certificates=2020.1.1=0
 certifi=2019.11.28=py36_1
 click=7.1.1=pyh8c360ce_0
+flask=1.1.1=py_1
 freetype=2.9.1=ha9979f8_1
 gast=0.3.3=py_0
 grpcio=1.27.2=py36h351948d_0
+gunicorn=20.0.4=pypi_0
 h5py=2.10.0=py36h5e291fa_0
 hdf5=1.10.4=h7ebc959_0
 icc_rt=2019.0.0=h0cc432a_1
@@ -50,6 +54,7 @@ termcolor=1.1.0=py36_1
 tk=8.6.8=hfa6e2cd_0
 vc=14.1=h0510ff6_4
 vs2015_runtime=14.16.27012=hf0eaf9b_1
+werkzeug=1.0.0=py_0
 wheel=0.34.2=py_1
 wincertstore=0.2=py36_1003
 xz=5.2.4=h2fa13f4_4
