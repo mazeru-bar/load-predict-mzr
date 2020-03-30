@@ -1,1 +1,1 @@
-web: gunicorn load-predict-mzr:app --log-file -
+web: gunicorn app:app --log-file -
