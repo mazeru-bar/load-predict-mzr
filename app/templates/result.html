@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Result</title>
+
+		<!-- cssの読み込み -->
+    <link rel="stylesheet" type="text/css" href="{{ staticfile('style.css') }}">
+
+	</head>
+	<body>
+		<!-- jsの読み込み -->
+		<!-- <script src="static/js/script.js"></script> -->
+
+		<div class="top_title">Uploadされた画像のクラス分類</div>
+		<p>予測結果 TOP5</p>
+
+		<ui>
+		{% for result in results %}
+			<li>{{result[0]}} : {{result[1]}} %</li>
+		{% endfor %}
+		</ui>
+
+
+		<input type="button" value="Top Page" onClick="location.href='./predict'">
+
+	</body>
+</html>
