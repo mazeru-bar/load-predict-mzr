@@ -27,7 +27,7 @@ MarkupSafe==1.1.1
 numpy==1.18.1
 oauthlib==3.0.1
 olefile==0.46
-opt-einsum==0+untagged.53.g6ab433b.dirty
+opt-einsum==3.2.0
 Pillow==7.0.0
 protobuf==3.11.3
 pyasn1==0.4.8
