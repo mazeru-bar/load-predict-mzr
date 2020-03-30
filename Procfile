@@ -1,1 +1,1 @@
-web: gunicorn run:app
+web: gunicorn load-predict-mzr:app
