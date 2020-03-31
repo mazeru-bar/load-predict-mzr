@@ -77,7 +77,21 @@ def predict():
 
             # Top-5のクラスを予測する
             # VGG16の1000クラスはdecode_predictions()で文字列に変換される
-            scores = model.predict(preprocess_input(x))[0]
+            pred = model.predict(preprocess_input(x))
+            top = decode_predictions(pred, top=5)[0]
+            scores = pred[0]
+            ###
+            results = []
+
+            for i in range(5):
+                results.append([top[i][1], top[i][2]])
+
+            """
+            for name, score in zip(top3_classes, scores[top3_classes]):
+                # scoreを小数点第3桁で切り捨て
+                score_rounddown = int(score*1000000) / 10000.0
+                results.append([name, score_rounddown])
+            ###
 
             # 予測されたクラス名を日本語に変換する
             # ImageNet の日本語のラベルデータを読み込む
@@ -93,7 +107,7 @@ def predict():
                 # scoreを小数点第3桁で切り捨て
                 score_rounddown = int(score*1000000) / 10000.0
                 results.append([name, score_rounddown])
-
+            """
             return render_template('result.html', results=results)
 
     return render_template('predict.html')
