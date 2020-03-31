@@ -14,11 +14,18 @@
 		<div class="top_title">Uploadされた画像のクラス分類</div>
 		<p>予測結果 TOP5</p>
 
-		<ui>
-		{% for result in results %}
-			<li>{{result[0]}} : {{result[1]}} %</li>
-		{% endfor %}
-		</ui>
+		<table border="5" frame="void" rules="rows" cellpadding="8">
+			<tr>
+			<td><b>class</b></td>
+			<td><b>result [%]</b></td>
+			</tr>
+			{% for result in results %}
+			<tr>
+			<td>{{result[0]}}</td>
+			<td>{{result[1]}}</td>
+			</tr>
+			{% endfor %}
+		</table>
 
 
 		<input type="button" value="Top Page" onClick="location.href='./predict'">

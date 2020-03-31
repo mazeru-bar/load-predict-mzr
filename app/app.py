@@ -84,7 +84,8 @@ def predict():
             results = []
 
             for i in range(5):
-                results.append([top[i][1], top[i][2]])
+                score_rounddown = int(top[i][2]*1000000) / 10000.0
+                results.append([top[i][1], score_rounddown])
 
             """
             for name, score in zip(top3_classes, scores[top3_classes]):
