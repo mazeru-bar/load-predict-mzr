@@ -15,7 +15,7 @@ sess = tf.Session()
 graph = tf.get_default_graph()
 set_session(sess)
 
-UPLOAD_FOLDER = './uploads'
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 #Flaskオブジェクトの生成
@@ -51,9 +51,10 @@ def predict():
         if file and is_allowed_file(file.filename):
             # 安全なファイル名を作成して画像ファイルを保存
             filename = secure_filename(file.filename)
-            file.save(app.config['UPLOAD_FOLDER']+'/'+filename)
+            #filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            filepath = filename
+            file.save(filepath)
 
-            filepath = app.config['UPLOAD_FOLDER']+'/'+filename
             results = [[1,2],[3,4],[5,6]]
             """
 
