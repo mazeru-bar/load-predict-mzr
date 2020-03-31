@@ -7,7 +7,7 @@ import tensorflow as tf
 import random
 import json
 
-from keras.applications.vgg16 import VGG16, preprocess_input, decode_predictions
+from keras.applications.mobilenet import MobileNet, preprocess_input, decode_predictions
 from keras.preprocessing import image
 from tensorflow.python.keras.backend import set_session
 
@@ -55,9 +55,9 @@ def predict():
             filepath = filename
             file.save(filepath)
 
-            # 学習済みのVGG16をロード
+            # 学習済みのMobileNetをロード
             # 構造とともに学習済みの重みも読み込まれる
-            model = VGG16(weights='imagenet')
+            model = MobileNet(weights='imagenet')
             # model.summary()
 
             # 引数で指定した画像ファイルを読み込む
