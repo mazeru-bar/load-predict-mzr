@@ -55,9 +55,6 @@ def predict():
             filepath = filename
             file.save(filepath)
 
-            results = [[1,2],[3,4],[5,6]]
-            """
-
             # 学習済みのVGG16をロード
             # 構造とともに学習済みの重みも読み込まれる
             model = VGG16(weights='imagenet')
@@ -68,7 +65,7 @@ def predict():
             img = image.load_img(filepath, target_size=(224, 224))
 
             # 画像ファイルをサーバから削除
-            #os.remove(filepath)
+            os.remove(filepath)
 
             # 読み込んだPIL形式の画像をarrayに変換
             x = image.img_to_array(img)
@@ -96,7 +93,7 @@ def predict():
                 # scoreを小数点第3桁で切り捨て
                 score_rounddown = int(score*1000000) / 10000.0
                 results.append([name, score_rounddown])
-            """
+
             return render_template('result.html', results=results)
 
     return render_template('predict.html')
