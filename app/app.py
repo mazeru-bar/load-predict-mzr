@@ -1,11 +1,12 @@
 import os, sys
-from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory
-from werkzeug.utils import secure_filename # ファイル名をチェックする関数
 import numpy as np
-from PIL import Image
-import tensorflow as tf
 import random
 import json
+
+from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory
+from werkzeug.utils import secure_filename # ファイル名をチェックする関数
+from PIL import Image
+import tensorflow as tf
 
 from keras.applications.mobilenet import MobileNet, preprocess_input, decode_predictions
 from keras.preprocessing import image
@@ -25,30 +26,37 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # ファイル容量制限 : 1MB
 app.config['MAX_CONTENT_LENGTH'] = 1 * 1024 * 1024
 
+# .があるかどうかのチェックと、拡張子の確認をする関数
+# OKなら１、だめなら0
 def is_allowed_file(filename):
-    # .があるかどうかのチェックと、拡張子の確認
-    # OKなら１、だめなら0
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# '/' へのアクセス
 @app.route('/')
 def index():
     return redirect(url_for('predict'))
 
+# '/predict' へのアクセス
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
+
+    # POST
     if request.method == 'POST':
 
+        # ファイルが読み込まれていない場合は'/predict'に戻る
         if 'file' not in request.files:
             flash('No file.')
             return redirect(url_for('predict'))
 
+        # ファイルが読み込まれている場合はそのファイルを読み込む
         file = request.files['file']
-
         if file.filename == '':
             flash('No file.')
             return redirect(url_for('predict'))
 
+        # 読み込んだファイルを処理する
         if file and is_allowed_file(file.filename):
+
             # 安全なファイル名を作成して画像ファイルを保存
             filename = secure_filename(file.filename)
             #filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -80,35 +88,13 @@ def predict():
             pred = model.predict(preprocess_input(x))
             top = decode_predictions(pred, top=5)[0]
             scores = pred[0]
-            ###
-            results = []
 
+            # 予測結果をリストに格納する
+            results = []
             for i in range(5):
                 score_rounddown = int(top[i][2]*1000000) / 10000.0
                 results.append([top[i][1], score_rounddown])
 
-            """
-            for name, score in zip(top3_classes, scores[top3_classes]):
-                # scoreを小数点第3桁で切り捨て
-                score_rounddown = int(score*1000000) / 10000.0
-                results.append([name, score_rounddown])
-            ###
-
-            # 予測されたクラス名を日本語に変換する
-            # ImageNet の日本語のラベルデータを読み込む
-            with open('imagenet_class_index.json') as f:
-                data = json.load(f)
-                class_names = np.array([row['ja'] for row in data])
-
-            top3_classes = scores.argsort()[-5:][::-1]
-
-            # 日本語での予測結果をリストに格納
-            results = []
-            for name, score in zip(class_names[top3_classes], scores[top3_classes]):
-                # scoreを小数点第3桁で切り捨て
-                score_rounddown = int(score*1000000) / 10000.0
-                results.append([name, score_rounddown])
-            """
             return render_template('result.html', results=results)
 
     return render_template('predict.html')
@@ -125,7 +111,6 @@ def add_staticfile():
         mtime =  str(int(os.stat(path).st_mtime))
         return '/static/css/' + fname + '?v=' + str(mtime)
     return dict(staticfile=staticfile_cp)
-
 
 if __name__ == "__main__":
     #app.run(debug=True)
